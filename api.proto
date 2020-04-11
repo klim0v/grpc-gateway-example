@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package api_pb;
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+
+message AddressRequest {
+    string address = 1;
+    uint64 height = 2;
+}
+message AddressResponse {
+    map<string, string> balance = 1;
+    string transactions_count = 2;
+}
+message SubscribeRequest {
+    string query = 1;
+}
+message SubscribeResponse {
+    string query = 1;
+    google.protobuf.Struct data = 2;
+    message Event {
+        string key = 1;
+        repeated string events = 2;
+    }
+    repeated Event events = 3;
+}
+
+service BlockchainService {
+    rpc Address (AddressRequest) returns (AddressResponse) {
+        option (google.api.http) = {
+            get: "/address/{address}"
+        };
+    }
+    rpc Subscribe (SubscribeRequest) returns (stream SubscribeResponse) {
+        option (google.api.http) = {
+            get: "/subscribe"
+        };
+    }
+}
