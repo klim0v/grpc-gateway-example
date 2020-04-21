@@ -5,8 +5,10 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/golang/protobuf/jsonpb"
+	"github.com/golang/protobuf/ptypes/empty"
 	_struct "github.com/golang/protobuf/ptypes/struct"
 	"github.com/klim0v/grpc-gateway-example/api_pb"
+	"google.golang.org/genproto/googleapis/api/httpbody"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"time"
@@ -18,6 +20,13 @@ type BlockchainServer struct {
 
 func NewBlockchainServer(eventBus <-chan interface{}) *BlockchainServer {
 	return &BlockchainServer{eventBus: eventBus}
+}
+
+func (*BlockchainServer) DownloadFile(_ context.Context, _ *empty.Empty) (*httpbody.HttpBody, error) {
+	return &httpbody.HttpBody{
+		ContentType: "application/octet-stream",
+		Data:        []byte("Hello World"),
+	}, nil
 }
 
 func (b *BlockchainServer) Address(_ context.Context, req *api_pb.AddressRequest) (*api_pb.AddressResponse, error) {

@@ -4,6 +4,8 @@ package api_pb;
 
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
+import "google/api/httpbody.proto";
+import "google/protobuf/empty.proto";
 
 message AddressRequest {
     string address = 1;
@@ -31,6 +33,11 @@ service BlockchainService {
         option (google.api.http) = {
             get: "/address/{address}"
         };
+    }
+    rpc DownloadFile(google.protobuf.Empty) returns (google.api.HttpBody) {
+        option (google.api.http) = {
+			get: "/file.txt"
+		};
     }
     rpc Subscribe (SubscribeRequest) returns (stream SubscribeResponse) {
         option (google.api.http) = {
