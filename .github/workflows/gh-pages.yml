@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - test
 
 jobs:
   deploy:
@@ -51,12 +50,15 @@ jobs:
 
       - run: rm -rf protobuf-import
 
-      - name: Deploy source
-        uses: peaceiris/actions-gh-pages@v3.5.5
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: test
-          publish_dir: .
+          author_name: Your Name
+          author_email: mail@example.com
+          message: "Your commit message"
+          add: "."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node
         uses: actions/setup-node@v1
