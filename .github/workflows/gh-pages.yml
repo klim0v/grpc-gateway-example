@@ -29,7 +29,7 @@ jobs:
           github.com/golang/protobuf/protoc-gen-go
 
       - run: export GOPATH=$HOME/go && echo $GOPATH
-      - run: go genarate
+      - run: go generate
       - run: cd $HOME
 
       - name: Deploy source
