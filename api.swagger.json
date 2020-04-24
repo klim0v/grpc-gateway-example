@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "My Habr Example Service",
-    "description": "# Description\n\n _test_ *description*",
+    "description": "Description test description",
     "version": "1.0",
     "contact": {
       "name": "Klimov Sergey",
