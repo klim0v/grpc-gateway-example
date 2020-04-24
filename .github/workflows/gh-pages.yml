@@ -30,13 +30,8 @@ jobs:
           github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
           github.com/golang/protobuf/protoc-gen-go
 
-      - run: go env GOPATH
-      - run: echo ${GOPATH}
-      - run: echo $GOPATH
-      - run: echo $HOME/go
-      - run: export GOPATH=/home/runner/go
-
-      - run: go generate
+      - run: export GOPATH=$HOME/go && echo $GOPATH
+      - run: GOPATH=$HOME/go go generate
       - run: cd ..
 
       - name: Deploy source
