@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - test
 
 jobs:
   deploy:
@@ -11,6 +12,26 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.14.0'
+      - run: mkdir -p src
+      - run: cd ./src
+      - run: go tidy
+      - run: go install \
+          github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway \
+          github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger \
+          github.com/golang/protobuf/protoc-gen-go
+      - run: go generate
+      - run: cd ..
+
+      - name: Deploy
+          uses: peaceiris/actions-gh-pages@v3.5.5
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_branch: test
+            publish_dir: ./src
 
       - name: Setup Node
         uses: actions/setup-node@v1
@@ -38,4 +59,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3.5.5
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
           publish_dir: ./public
