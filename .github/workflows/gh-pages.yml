@@ -37,7 +37,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: test
-          publish_dir: ./src
+          publish_dir: .
 
       - name: Setup Node
         uses: actions/setup-node@v1
