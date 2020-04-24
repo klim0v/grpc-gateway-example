@@ -47,7 +47,7 @@ jobs:
 
 
       - run: go generate
-        with:
+        env:
           GOPATH: 'protobuf-import'
 
       - run: rm -rf protobuf-import
