@@ -30,7 +30,7 @@ jobs:
 
       - run: go generate
         env:
-          - GOPATH: $HOME/go
+          GOPATH: $HOME/go
 
       - name: Deploy source
         uses: peaceiris/actions-gh-pages@v3.5.5
