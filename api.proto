@@ -34,6 +34,7 @@ service BlockchainService {
             get: "/address/{address}"
         };
     }
+    //TODO
     rpc DownloadFile(google.protobuf.Empty) returns (google.api.HttpBody) {
         option (google.api.http) = {
 			get: "/file.txt"
