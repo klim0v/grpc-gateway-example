@@ -22,16 +22,35 @@ jobs:
         with:
           go-version: '^1.14.0'
 
-      - run: go mod tidy
+      - run: go mod tidy -mod=vendor
       - run: go install
           github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
           github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
           github.com/golang/protobuf/protoc-gen-go
-      - run: go env
-      - run: ls /home/runner/go
+
+      - run: set -emou pipefail
+
+      - name: Set parent directory to hold all the symlinks
+        run: mkdir -p "${PROTOBUF_IMPORT_DIR}"
+
+      - name: Remove any existing symlinks & empty directories
+        run: find "${PROTOBUF_IMPORT_DIR}" -type l -delete && find "${PROTOBUF_IMPORT_DIR}" -type d -empty -delete
+
+      - name: Download all the required dependencies
+        run: go mod download
+
+      - name: Get all the modules we use and create required directory structure
+        run: go list -f "${PROTOBUF_IMPORT_DIR}/src/{{ .Path }}" -m all xargs -L1 dirname | sort | uniq | xargs mkdir -p
+
+      - name: Create symlinks
+        run: go list -f "{{ .Dir }} ${PROTOBUF_IMPORT_DIR}/src/{{ .Path }}" -m all | xargs -L1 -- ln -s
+
+
       - run: go generate
-        env:
-          GOPATH: /home/runner/go
+        with:
+          GOPATH: 'protobuf-import'
+
+      - run: rm -rf protobuf-import
 
       - name: Deploy source
         uses: peaceiris/actions-gh-pages@v3.5.5
