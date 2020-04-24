@@ -31,27 +31,19 @@ jobs:
       - run: set -emou pipefail
 
       - name: Set parent directory to hold all the symlinks
-        run: mkdir -p "${PROTOBUF_IMPORT_DIR}"
-        env:
-          GOPATH: 'protobuf-import'
+        run: mkdir -p "protobuf-import"
 
       - name: Remove any existing symlinks & empty directories
-        run: find "${PROTOBUF_IMPORT_DIR}" -type l -delete && find "${PROTOBUF_IMPORT_DIR}" -type d -empty -delete
-        env:
-          GOPATH: 'protobuf-import'
+        run: find "protobuf-import" -type l -delete && find "protobuf-import" -type d -empty -delete
 
       - name: Download all the required dependencies
         run: go mod download
 
       - name: Get all the modules we use and create required directory structure
-        run: go list -f "${PROTOBUF_IMPORT_DIR}/src/{{ .Path }}" -m all xargs -L1 dirname | sort | uniq | xargs mkdir -p
-        env:
-          GOPATH: 'protobuf-import'
+        run: go list -f "protobuf-import/src/{{ .Path }}" -m all xargs -L1 dirname | sort | uniq | xargs mkdir -p
 
       - name: Create symlinks
-        run: go list -f "{{ .Dir }} ${PROTOBUF_IMPORT_DIR}/src/{{ .Path }}" -m all | xargs -L1 -- ln -s
-        env:
-          GOPATH: 'protobuf-import'
+        run: go list -f "{{ .Dir }} protobuf-import/src/{{ .Path }}" -m all | xargs -L1 -- ln -s
 
       - run: go generate
         env:
