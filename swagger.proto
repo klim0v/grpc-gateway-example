@@ -10,7 +10,7 @@ option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
         title: "My Habr Example Service"
         description: "# Description\n\n"
                      "_test_ **description**\n"
-                     "<a href="#">link</a>\n"
+                     "<a href='#'>link</a>\n"
                      "* `1`\n"
                      "* `2`\n"
         version: "1.0"
