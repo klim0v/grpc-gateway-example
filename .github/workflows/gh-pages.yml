@@ -74,7 +74,7 @@ jobs:
       - run: npm install -g redoc-cli
 
       - name: Build docs
-        run: redoc-cli bundle ./src/api.swagger.json
+        run: redoc-cli bundle ./api.swagger.json
 
       - run: mkdir -p ./public && mv redoc-static.html ./public/index.html
 
