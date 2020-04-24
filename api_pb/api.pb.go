@@ -272,7 +272,9 @@ func init() {
 	proto.RegisterType((*SubscribeResponse_Event)(nil), "api_pb.SubscribeResponse.Event")
 }
 
-func init() { proto.RegisterFile("api.proto", fileDescriptor_00212fb1f9d3bf1c) }
+func init() {
+	proto.RegisterFile("api.proto", fileDescriptor_00212fb1f9d3bf1c)
+}
 
 var fileDescriptor_00212fb1f9d3bf1c = []byte{
 	// 495 bytes of a gzipped FileDescriptorProto
@@ -311,11 +313,11 @@ var fileDescriptor_00212fb1f9d3bf1c = []byte{
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ context.Context
-var _ grpc.ClientConn
+var _ grpc.ClientConnInterface
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion4
+const _ = grpc.SupportPackageIsVersion6
 
 // BlockchainServiceClient is the client API for BlockchainService service.
 //
@@ -327,10 +329,10 @@ type BlockchainServiceClient interface {
 }
 
 type blockchainServiceClient struct {
-	cc *grpc.ClientConn
+	cc grpc.ClientConnInterface
 }
 
-func NewBlockchainServiceClient(cc *grpc.ClientConn) BlockchainServiceClient {
+func NewBlockchainServiceClient(cc grpc.ClientConnInterface) BlockchainServiceClient {
 	return &blockchainServiceClient{cc}
 }
 
