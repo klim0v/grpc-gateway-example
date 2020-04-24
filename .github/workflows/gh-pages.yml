@@ -28,9 +28,9 @@ jobs:
           github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
           github.com/golang/protobuf/protoc-gen-go
 
-      - run: export GOPATH=$HOME/go && echo $GOPATH
       - run: go generate
-      - run: cd $HOME
+        env:
+          - GOPATH: $HOME/go
 
       - name: Deploy source
         uses: peaceiris/actions-gh-pages@v3.5.5
