@@ -40,7 +40,7 @@ jobs:
         run: go mod download
 
       - name: Get all the modules we use and create required directory structure
-        run: go list -f "protobuf-import/src/{{ .Path }}" -m all xargs -L1 dirname | sort | uniq | xargs mkdir -p
+        run: go list -f "protobuf-import/src/{{ .Path }}" -m all | xargs -L1 dirname | sort | uniq | xargs mkdir -p
 
       - name: Create symlinks
         run: go list -f "{{ .Dir }} protobuf-import/src/{{ .Path }}" -m all | xargs -L1 -- ln -s
