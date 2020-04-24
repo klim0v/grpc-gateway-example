@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: pwd
       - uses: actions/checkout@v2
 
       - name: Install Protoc
@@ -48,7 +47,7 @@ jobs:
 
       - run: go generate
         env:
-          GOPATH: protobuf-import
+          GOPATH: /home/runner/work/grpc-gateway-example/grpc-gateway-example/protobuf-import
 
       - run: rm -rf protobuf-import
 
