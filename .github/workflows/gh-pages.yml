@@ -55,7 +55,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3.5.5
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: master-test
+          publish_branch: test
           publish_dir: .
 
       - name: Setup Node
