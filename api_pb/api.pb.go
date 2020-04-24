@@ -324,7 +324,6 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type BlockchainServiceClient interface {
 	Address(ctx context.Context, in *AddressRequest, opts ...grpc.CallOption) (*AddressResponse, error)
-	//TODO
 	DownloadFile(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*httpbody.HttpBody, error)
 	Subscribe(ctx context.Context, in *SubscribeRequest, opts ...grpc.CallOption) (BlockchainService_SubscribeClient, error)
 }
@@ -390,7 +389,6 @@ func (x *blockchainServiceSubscribeClient) Recv() (*SubscribeResponse, error) {
 // BlockchainServiceServer is the server API for BlockchainService service.
 type BlockchainServiceServer interface {
 	Address(context.Context, *AddressRequest) (*AddressResponse, error)
-	//TODO
 	DownloadFile(context.Context, *empty.Empty) (*httpbody.HttpBody, error)
 	Subscribe(*SubscribeRequest, BlockchainService_SubscribeServer) error
 }
