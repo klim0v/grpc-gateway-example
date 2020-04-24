@@ -20,7 +20,7 @@ jobs:
       - name: Build all files
         run: mkdir -p src
       - run: cd ./src
-      - run: go tidy
+      - run: go mod tidy
       - run: go install \
           github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway \
           github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger \
