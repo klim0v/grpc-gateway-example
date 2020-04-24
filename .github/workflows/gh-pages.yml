@@ -22,7 +22,7 @@ jobs:
         with:
           go-version: '^1.14.0'
 
-      - run: mv . ./src/
+      - run: mv * ./src
       - run: cd ./src
       - run: go mod tidy
       - run: go install
