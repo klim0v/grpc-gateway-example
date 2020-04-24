@@ -1,4 +1,5 @@
 all:
+        sets
 		mkdir -p "api_pb"
 		protoc -I/usr/local/include -I. \
 			-I${GOPATH}/src \
