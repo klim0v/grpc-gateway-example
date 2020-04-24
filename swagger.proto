@@ -8,7 +8,10 @@ package api_pb;
 option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
     info: {
         title: "My Habr Example Service"
-        description: "# Description\n\n _test_ *description*"
+        description: "# Description\n\n"
+                     "_test_ *description*\n"
+                     "* `1`\n"
+                     "* `2`\n"
         version: "1.0"
         contact: {
             name: "Klimov Sergey"
