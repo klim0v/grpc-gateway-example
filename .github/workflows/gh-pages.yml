@@ -23,6 +23,7 @@ jobs:
           go-version: '^1.14.0'
 
       - run: mkdir -p src
+      - run: mv * ./src
       - run: cd ./src
       - run: go mod tidy
       - run: go install
@@ -31,7 +32,7 @@ jobs:
           github.com/golang/protobuf/protoc-gen-go
 
       - run: export GOPATH=$HOME/go && echo $GOPATH
-      - run: GOPATH=$HOME/go go generate
+      - run: make
       - run: cd ..
 
       - name: Deploy source
@@ -59,7 +60,7 @@ jobs:
       - run: npm install -g redoc-cli
 
       - name: Build docs
-        run: redoc-cli bundle ./api.swagger.json
+        run: redoc-cli bundle ./src/api.swagger.json
 
       - run: mkdir -p ./public && mv redoc-static.html ./public/index.html
 
