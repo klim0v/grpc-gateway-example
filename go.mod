@@ -9,6 +9,7 @@ require (
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0
 	github.com/grpc-ecosystem/grpc-gateway v1.14.3
 	github.com/prometheus/client_golang v1.5.1
+	github.com/rakyll/statik v0.1.7 // indirect
 	github.com/stretchr/testify v1.5.1 // indirect
 	github.com/tmc/grpc-websocket-proxy v0.0.0-20200122045848-3419fae592fc
 	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e
